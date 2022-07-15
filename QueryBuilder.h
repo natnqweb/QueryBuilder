@@ -33,6 +33,8 @@ public:
 	QueryBuilder& Count(std::string str);
 	QueryBuilder& SelectAs(std::string strSelect,std::string strAs);
     QueryBuilder& WhereInSubquery(std::string strWhere, QueryBuilder& SubQuery);
+    QueryBuilder& Or(std::string str);
+    QueryBuilder& And(std::string str);
     QueryBuilder& End();
     void ClearQuery();
 
@@ -88,6 +90,18 @@ QueryBuilder& QueryBuilder::Select(std::string str)
 void QueryBuilder::ClearQuery()
 {
     strQuery.clear();
+}
+QueryBuilder& QueryBuilder::And(std::string str)
+{
+    strQuery += " AND ";
+    strQuery += str;
+    return *this;
+}
+QueryBuilder& QueryBuilder::Or(std::string str)
+{
+    strQuery += " OR ";
+    strQuery += str;
+    return *this;
 }
 QueryBuilder& QueryBuilder::From(std::string str)
 {
